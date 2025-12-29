@@ -1,0 +1,14 @@
+# ===============Stage 1: Build =================
+FROM gradle:9.2.1-jdk17 AS builder
+WORKDIR /app
+
+COPY . .
+RUN gradle clean bootJar -x test
+
+# ==============Stage 2: Run ====================
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=builder /app/build/libs/*.jar app.jar
+
+EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "app.jar"]
