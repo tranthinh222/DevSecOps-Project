@@ -1,14 +1,9 @@
-# ===============Stage 1: Build =================
-FROM gradle:9.2.1-jdk17 AS builder
-WORKDIR /app
+FROM jenkins/agent:jdk17
 
-COPY . .
-RUN gradle clean bootJar -x test
+USER root
 
-# ==============Stage 2: Run ====================
-FROM eclipse-temurin:17-jre
-WORKDIR /app
-COPY --from=builder /app/build/libs/*.jar app.jar
+RUN apt-get update && \
+    apt-get install -y docker.io && \
+    apt-get clean
 
-EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "app.jar"]
+USER jenkins
