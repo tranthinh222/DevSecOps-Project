@@ -36,7 +36,7 @@ pipeline {
                 docker pull tranthinh123/myapp:latest
                 docker stop myapp || true
                 docker rm myapp || true
-                docker run -d --name myapp -p 8080:8080 tranthinh123/myapp:latest
+                docker run -d --name myapp -p 8081:8080 tranthinh123/myapp:latest
                 '''
             }
         }
