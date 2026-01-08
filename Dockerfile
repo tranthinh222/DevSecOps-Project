@@ -1,19 +1,10 @@
-# ========== STAGE 1: BUILD ==========
-FROM gradle:8.14-jdk17 AS builder
-WORKDIR /app
+FROM jenkins/inbound-agent:latest
 
-COPY . .
+USER root
 
-RUN gradle clean bootJar -x test
+RUN groupadd -g 983 docker && usermod -aG docker jenkins
 
-# ========== STAGE 2: RUN ==========
-FROM eclipse-temurin:17-jre
-WORKDIR /app
+RUN apt-get update && apt-get install -y docker.io \
+	&& rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /app/build/libs/*.jar app.jar
-
-# Expose port Spring Boot
-EXPOSE 8080
-
-# Run app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+USER jenkins
