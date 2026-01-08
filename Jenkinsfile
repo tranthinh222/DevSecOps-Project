@@ -5,6 +5,14 @@ pipeline {
             }
       }
     stages {
+        stage('Debug Docker') {
+            steps {
+                echo "Debug Docker client and daemon..."
+                sh 'docker version'
+                sh 'docker ps'
+            }
+        }
+
         stage('Pull source') {
             steps {
                 echo "Pull source code.."
