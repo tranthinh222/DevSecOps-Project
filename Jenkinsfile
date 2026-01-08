@@ -1,9 +1,11 @@
 pipeline {
-    agent { 
-        node {
-            label 'docker-agent-java'
-            }
-      }
+    agent {
+        docker {
+            image 'tranthinh123/jenkins-with-docker:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock -u 0:0'
+        }
+    }
+
     stages {
         stage('Debug Docker') {
             steps {
