@@ -2,6 +2,7 @@ pipeline {
     agent { 
         node {
             label 'docker-agent-java'
+            customWorkspace '/home/jenkins/agent_workspace/23120168'
             }
       }
     stages {
@@ -14,10 +15,10 @@ pipeline {
         }
 
         stage('Pull source') {
-            checkout([$class: 'GitSCM',
-                  branches: [[name: '*/main']],
-                  userRemoteConfigs: [[url: 'https://github.com/tranthinh222/gradle-ci-cd-demo.git']]
-        ])
+            steps {
+                echo "Pull source code.."
+                git branch: 'main', url: 'https://github.com/tranthinh222/gradle-ci-cd-demo.git'
+            }
         }
         stage('Build Docker Image') {
             steps {
