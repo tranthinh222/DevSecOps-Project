@@ -1,10 +1,8 @@
-FROM jenkins/agent:latest
+FROM jenkins/agent:jdk17
 
 USER root
-
 RUN apt-get update && \
-    apt-get install -y docker.io git && \
-    getent group docker || groupadd -g 999 docker && \
-    usermod -aG docker jenkins
+    apt-get install -y docker.io && \
+    rm -rf /var/lib/apt/lists/*
 
 USER jenkins
