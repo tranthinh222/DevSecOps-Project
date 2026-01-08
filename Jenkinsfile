@@ -33,7 +33,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                docker pull tranthinh123/myapp:latest
                 docker stop myapp || true
                 docker rm myapp || true
                 docker run -d --name myapp -p 8081:8081 tranthinh123/myapp:latest
