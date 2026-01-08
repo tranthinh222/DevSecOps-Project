@@ -1,12 +1,19 @@
-FROM jenkins/jenkins:lts
+# ========== STAGE 1: BUILD ==========
+FROM gradle:8.14-jdk17 AS builder
+WORKDIR /app
 
-USER root
+COPY . .
 
-RUN apt-get update && \
-    apt-get install -y docker.io git && \
-    rm -rf /var/lib/apt/lists/*
+RUN gradle clean bootJar -x test
 
-RUN groupadd -g 999 docker || true
-RUN usermod -aG docker jenkins
+# ========== STAGE 2: RUN ==========
+FROM eclipse-temurin:17-jre
+WORKDIR /app
 
-USER jenkins
+COPY --from=builder /app/build/libs/*.jar app.jar
+
+# Expose port Spring Boot
+EXPOSE 8080
+
+# Run app
+ENTRYPOINT ["java", "-jar", "app.jar"]
