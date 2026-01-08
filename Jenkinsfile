@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent { 
+        node {
+            label 'docker-agent-java'
+            }
+      }
     stages {
         stage('Pull source') {
             steps {
