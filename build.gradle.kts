@@ -32,9 +32,10 @@ tasks.withType<Test> {
 
 dependencyCheck {
     nvd {
-        enabled = false
+        enabled = true
     }
     ossIndex {
         enabled = true
     }
+    failBuildOnCVSS = 7.0
 }

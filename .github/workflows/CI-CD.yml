@@ -54,6 +54,8 @@ jobs:
       # =====================
       - name: OWASP Dependency Check
         run: ./gradlew dependencyCheckAnalyze --stacktrace --info
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
 
       # =====================
       # Start App
