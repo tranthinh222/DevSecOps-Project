@@ -37,4 +37,11 @@ dependencyCheck {
     nvd {
         apiKey = System.getenv("NVD_API_KEY")
     }
+
+    analyzers {
+        ossIndex {
+            enabled = false
+        }
+    }
 }
+
