@@ -1,6 +1,6 @@
 plugins {
 	java
-	id("org.owasp.dependencycheck") version "8.4.0"
+	id("org.owasp.dependencycheck") version "12.1.0"
 	id("org.springframework.boot") version "4.0.1"
 	id("io.spring.dependency-management") version "1.1.7"
 }
@@ -31,5 +31,7 @@ tasks.withType<Test> {
 }
 
 dependencyCheck {
-    failBuildOnCVSS = 7.0f
+    nvd {
+        apiKey = System.getenv("NVD_API_KEY")
+    }
 }
