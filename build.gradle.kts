@@ -31,11 +31,10 @@ tasks.withType<Test> {
 }
 
 dependencyCheck {
+    autoUpdate = true
+    failBuildOnCVSS = 7.0f
+
     nvd {
-        enabled = true
+        apiKey = System.getenv("NVD_API_KEY")
     }
-    ossIndex {
-        enabled = true
-    }
-    failBuildOnCVSS = 7.0
 }
