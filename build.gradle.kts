@@ -31,5 +31,10 @@ tasks.withType<Test> {
 }
 
 dependencyCheck {
-    autoUpdate = true
+    nvd {
+        enabled = false
+    }
+    ossIndex {
+        enabled = true
+    }
 }
