@@ -31,5 +31,5 @@ tasks.withType<Test> {
 }
 
 dependencyCheck {
-    autoUpdate = false
+    autoUpdate = true
 }
