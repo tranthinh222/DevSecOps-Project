@@ -31,5 +31,5 @@ tasks.withType<Test> {
 }
 
 dependencyCheck {
-    failBuildOnCVSS = 7
+    failBuildOnCVSS = 7.0f
 }
