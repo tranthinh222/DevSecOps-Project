@@ -31,7 +31,5 @@ tasks.withType<Test> {
 }
 
 dependencyCheck {
-    nvd {
-        apiKey = System.getenv("NVD_API_KEY")
-    }
+    autoUpdate = false
 }
