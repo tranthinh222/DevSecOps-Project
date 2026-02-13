@@ -31,7 +31,7 @@ tasks.withType<Test> {
 }
 
 dependencyCheck {
-    autoUpdate = false
+    autoUpdate = true
     failBuildOnCVSS = 7.0f
 
     nvd {
