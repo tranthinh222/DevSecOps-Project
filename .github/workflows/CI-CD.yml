@@ -75,6 +75,25 @@ jobs:
           ./gradlew bootRun &
           sleep 40
           curl -I http://localhost:8080/hello?name=test
+      # Expose app
+      - name: Setup ngrok
+        uses: ngrok/ngrok-action@v1
+        with:
+          authtoken: ${{ secrets.NGROK_AUTH_TOKEN }}
+
+      - name: Start tunnel
+        run: |
+          ngrok http 8080 &
+          sleep 10
+
+      - name: Get public URL
+        id: geturl
+        run: |
+          sudo apt-get install -y jq
+          URL=$(curl -s http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url')
+          echo "PUBLIC_URL=$URL" >> $GITHUB_ENV
+          echo "Public URL is $URL"
+
 
       # =====================
       # DAST - SOOS
