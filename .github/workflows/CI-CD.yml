@@ -12,6 +12,7 @@ jobs:
     permissions:
       security-events: write
       contents: read
+      issues: write
 
     steps:
       - name: Checkout source
@@ -22,6 +23,15 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+
+      - name: Cache Dependency Check data
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/dependency-check-data
+          key: dependency-check-${{ runner.os }}
+          restore-keys: |
+            dependency-check-
+
 
       - name: Grant execute permission
         run: chmod +x gradlew
