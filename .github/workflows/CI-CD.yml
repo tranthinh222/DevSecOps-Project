@@ -110,7 +110,7 @@ jobs:
           api_key: ${{ secrets.API_KEY }}
           client_id: ${{ secrets.CLIENT_ID }}
           project_name: "SpringBoot Demo"
-          target_url: "http://localhost:8080"
+          target_url: http://host.docker.internal:8080
           scan_mode: "Baseline"
           severity: "High,Critical"
 
