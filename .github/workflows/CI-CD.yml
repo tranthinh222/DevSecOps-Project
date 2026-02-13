@@ -96,12 +96,10 @@ jobs:
         run: sudo apt-get install -y jq
 
       - name: Get public URL
-        id: geturl
+        id: ngrok
         run: |
-          sudo apt-get install -y jq
           URL=$(curl -s http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url')
-          echo "PUBLIC_URL=$URL" >> $GITHUB_ENV
-          echo "Public URL is $URL"
+          echo "url=$URL" >> $GITHUB_OUTPUT
 
 
       # =====================
@@ -110,12 +108,12 @@ jobs:
       - name: Run SOOS DAST Scan
         uses: soos-io/soos-dast-github-action@v2
         with:
-          api_key: ${{ secrets.API_KEY }}
-          client_id: ${{ secrets.CLIENT_ID }}
-          project_name: "SpringBoot Demo"
-          target_url: ${{ steps.ngrok.outputs.url }}
-          scan_mode: "Baseline"
-          severity: "High,Critical"
+        api_key: ${{ secrets.API_KEY }}
+        client_id: ${{ secrets.CLIENT_ID }}
+        project_name: "SpringBoot Demo"
+        target_url: ${{ steps.ngrok.outputs.url }}
+        scan_mode: baseline
+        on_failure: fail_on_any_vulnerability
 
 
 
