@@ -108,12 +108,12 @@ jobs:
       - name: Run SOOS DAST Scan
         uses: soos-io/soos-dast-github-action@v2
         with:
-        api_key: ${{ secrets.API_KEY }}
-        client_id: ${{ secrets.CLIENT_ID }}
-        project_name: "SpringBoot Demo"
-        target_url: ${{ steps.ngrok.outputs.url }}
-        scan_mode: baseline
-        on_failure: fail_on_any_vulnerability
+          api_key: ${{ secrets.API_KEY }}
+          client_id: ${{ secrets.CLIENT_ID }}
+          project_name: "SpringBoot Demo"
+          target_url: ${{ steps.ngrok.outputs.url }}
+          scan_mode: baseline
+          on_failure: fail_on_any_vulnerability
 
 
 
