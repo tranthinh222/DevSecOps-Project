@@ -79,8 +79,15 @@ jobs:
       # =====================
       # DAST - NUCLEI
       # =====================
-      - name: Setup Nuclei
-        uses: projectdiscovery/nuclei-action@v1
+      - name: Install Nuclei
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y golang-go
+          go install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: Update Templates
+        run: nuclei -update-templates
 
       - name: Run Nuclei Scan
         run: |
