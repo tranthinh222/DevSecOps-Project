@@ -92,6 +92,7 @@ jobs:
       - name: Run Nuclei Scan
         run: |
           nuclei -u http://localhost:8080 \
-            -severity critical,high \
-            -exit-code 1
+            --severity critical,high \
+            --fail-on critical,high
+
 
