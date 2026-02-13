@@ -93,6 +93,15 @@ jobs:
         run: |
           nuclei -u http://localhost:8080 \
             --severity critical,high \
-            --fail-on critical,high
+            -json -o nuclei-report.json
+
+          if [ -s nuclei-report.json ]; then
+            echo "High/Critical vulnerabilities found!"
+            cat nuclei-report.json
+            exit 1
+          else
+            echo "No High/Critical vulnerabilities found."
+          fi
+
 
 
