@@ -6,12 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-class LoginController {
+class TestController {
 
     @GetMapping("/hello")
     public ResponseEntity<String> hello(@RequestParam String name) {
         return ResponseEntity.ok().contentType(MediaType.TEXT_HTML)
             .body("<html><body>Hello " + name + "</body></html>");
     }
+
+    @GetMapping("/ping")
+    public String ping(@RequestParam String host) throws Exception {
+        Process p = Runtime.getRuntime().exec("ping " + host);
+        return "Pinged";
+    }
+
 
 }
