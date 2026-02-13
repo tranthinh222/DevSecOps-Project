@@ -8,17 +8,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 class TestController {
 
-    @GetMapping("/hello")
-    public ResponseEntity<String> hello(@RequestParam String name) {
-        return ResponseEntity.ok().contentType(MediaType.TEXT_HTML)
-            .body("<html><body>Hello " + name + "</body></html>");
-    }
+    // // test XSS
+    // @GetMapping("/hello")
+    // public ResponseEntity<String> hello(@RequestParam String name) {
+    //     return ResponseEntity.ok().contentType(MediaType.TEXT_HTML)
+    //         .body("<html><body>Hello " + name + "</body></html>");
+    // }
 
-    @GetMapping("/ping")
-    public String ping(@RequestParam String host) throws Exception {
-        Process p = Runtime.getRuntime().exec("ping " + host);
-        return "Pinged";
-    }
+
+    // // Test Command Injection
+    // @GetMapping("/ping")
+    // public String ping(@RequestParam String host) throws Exception {
+    //     Process p = Runtime.getRuntime().exec("ping " + host);
+    //     return "Pinged";
+    // }
 
 
 }
