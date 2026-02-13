@@ -79,19 +79,12 @@ jobs:
       # =====================
       # DAST - NUCLEI
       # =====================
-      - name: Install Nuclei
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget
-          wget https://github.com/projectdiscovery/nuclei/releases/latest/download/nuclei-linux-amd64.zip
-          unzip nuclei-linux-amd64.zip
-          sudo mv nuclei /usr/local/bin/
-
-      - name: Update Nuclei Templates
-        run: nuclei -update-templates
+      - name: Setup Nuclei
+        uses: projectdiscovery/nuclei-action@v1
 
       - name: Run Nuclei Scan
         run: |
           nuclei -u http://localhost:8080 \
             -severity critical,high \
             -exit-code 1
+
