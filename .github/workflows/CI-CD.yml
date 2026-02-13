@@ -92,6 +92,9 @@ jobs:
           ngrok http 8080 > /dev/null &
           sleep 10
 
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
       - name: Get public URL
         id: geturl
         run: |
